@@ -21,7 +21,7 @@ app.post(["/node/enviar-produtos"], (_: express.Request, res: express.Response):
             return console.log(id);
         }
     );
-    res.send("ok....")
+    res.send("Mensagem enviada....")
 });
 
 const server = app.listen(port, (): void => {
