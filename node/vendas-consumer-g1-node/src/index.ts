@@ -1,12 +1,11 @@
-'use strict';
-var async = require('async');
+import async from 'async';
+import redis from 'redis';
 
-var redis = require('redis');
-var redisClient = redis.createClient();
+const redisClient = redis.createClient();
 
 const STREAMS_KEY = "eventos-produtos";
 const APPLICATION_ID = "iot_application:node_1";
-var CONSUMER_ID = "consumer:1"
+const CONSUMER_ID = "consumer:1"
 
 
 // create the group
@@ -30,14 +29,14 @@ async.forever(
             }
 
             if (stream) {
-                var messages = stream[0][1]; 
+                const messages = stream[0][1]; 
                 // print all messages
                 messages.forEach(function(message){
                     // convert the message into a JSON Object
-                    var id = message[0];
-                    var values = message[1];
-                    var msgObject = { id : id};
-                    for (var i = 0 ; i < values.length ; i=i+2) {
+                    const id = message[0];
+                    const values = message[1];
+                    const msgObject = { id : id};
+                    for (let i = 0 ; i < values.length ; i=i+2) {
                         msgObject[values[i]] = values[i+1];
                     }                    
                     console.log( "Message: "+ JSON.stringify(msgObject));
