@@ -1,12 +1,12 @@
 node/vendas-produtor-node/node_modules
 node/vendas-consumer-g1-node/node_modules
-node/vendas-consumer-g2-node/node_modules
+node/vendas-producer-node/node_modules
 #.env
 
 # Ignore built ts files
 node/vendas-produtor-node/dist/
 node/vendas-consumer-g1-node/dist/
-node/vendas-consumer-g2-node/dist/
+node/vendas-producer-node/dist/
 
 # Coverage reports
 coverage
