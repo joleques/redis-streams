@@ -16,36 +16,67 @@ services:
       - REDIS_HOSTS=local:redis:6379
     ports:
       - "8081:8081"
-#
-# consumer_one:#
-#   container_name: go-consumer-one#
-#   build: '.'#
-#   environment:#
-#     REDIS_HOST: redis#
-#     STREAM: events#
-#     GROUP: GroupOne#
-#   depends_on:#
-#     - redis#
-#   restart: always
-#
-# consumer_two:#
-#   container_name: go-consumer-two#
-#   build: '.'#
-#   environment:#
-#     REDIS_HOST: redis#
-#     STREAM: events#
-#     GROUP: GroupTwo#
-#   depends_on:#
-#     - redis#
-#   restart: always
-#
-# consumer_three:#
-#   container_name: go-consumer-three#
-#   build: '.'#
-#   environment:#
-#     REDIS_HOST: redis#
-#     STREAM: events#
-#     GROUP: GroupTwo#
-#   depends_on:#
-#     - redis#
-#   restart: always
+
+  producer-java:
+    container_name: vendas-producer-java
+    hostname: vendas-producer-java
+    image: vendas-producer-java:01
+    restart: always
+    depends_on:
+      - redis
+    ports:
+      - "9091:9091"
+
+  consumer-java-1:
+    container_name: vendas-consumer-java-1
+    hostname: vendas-consumer-java-1
+    image: vendas-consumer-java:01
+    restart: always
+    depends_on:
+      - redis
+    ports:
+      - "9092:9092"
+
+  consumer-java-2:
+    container_name: vendas-consumer-java-2
+    hostname: vendas-consumer-java-2
+    image: vendas-consumer-java:01
+    restart: always
+    depends_on:
+      - redis
+    ports:
+      - "9093:9092"
+
+  consumer-java-3:
+    container_name: vendas-consumer-java-3
+    hostname: vendas-consumer-java-3
+    image: vendas-consumer-java:01
+    restart: always
+    depends_on:
+      - redis
+    ports:
+      - "9094:9092"
+
+  consumer-node-1:
+    container_name: vendas-consumer-node-1
+    hostname: vendas-consumer-node-1
+    image: vendas-consumer-node:01
+    restart: always
+    depends_on:
+      - redis
+
+  consumer-node-2:
+    container_name: vendas-consumer-node-2
+    hostname: vendas-consumer-node-2
+    image: vendas-consumer-node:01
+    restart: always
+    depends_on:
+      - redis
+
+  consumer-node-3:
+    container_name: vendas-consumer-node-3
+    hostname: vendas-consumer-node-3
+    image: vendas-consumer-node:01
+    restart: always
+    depends_on:
+      - redis

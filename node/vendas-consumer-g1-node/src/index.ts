@@ -1,7 +1,10 @@
 import async from 'async';
 import redis from 'redis';
 
-const redisClient = redis.createClient();
+const redisClient = redis.createClient({
+    host: "redis",
+    port: 6379
+});
 
 const STREAMS_KEY = "eventos-produtos";
 const APPLICATION_ID = "iot_application:node_1";
