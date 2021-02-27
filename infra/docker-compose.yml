@@ -17,6 +17,35 @@ services:
     ports:
       - "8081:8081"
 
+  redis-exporter:
+    image: oliver006/redis_exporter
+    container_name: redis-exporter
+    environment:
+      - REDIS_ADDR=redis:6379
+      - REDIS_EXPORTER_DEBUG=1
+    ports:
+      - 9121:9121
+    depends_on:
+      - redis
+
+  prometheus-server:
+    image: prom/prometheus
+    ports:
+        - 9090:9090
+    volumes:
+        - ./prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+    depends_on:
+      - redis-exporter
+
+  grafana-ui:
+    image: grafana/grafana
+    ports:
+        - 3000:3000
+    environment:
+        - GF_SECURITY_ADMIN_PASSWORD=secret
+    links:
+        - prometheus-server:prometheus
+
   producer-java:
     container_name: vendas-producer-java
     hostname: vendas-producer-java
